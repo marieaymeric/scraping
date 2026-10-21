@@ -1,0 +1,25 @@
+# Environnement virtuel
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Données scrapées (générées à l'exécution, pas versionnées)
+data/**/*.csv
+
+# Logs
+*.log
+
+# Editeurs / OS
+.vscode/
+.idea/
+.DS_Store
+
+# WebDriver téléchargé manuellement (si utilisé)
+chromedriver*
+geckodriver*
