@@ -3,23 +3,27 @@ venv/
 env/
 .venv/
 
-# Python
+# Fichiers Python compilés
 __pycache__/
 *.pyc
 *.pyo
-*.egg-info/
 
-# Données scrapées (générées à l'exécution, pas versionnées)
+# Données scrapées
 data/**/*.csv
+data/*.db
+data/**/*.db
 
-# Logs
-*.log
+# Fichiers de debug
+debug/
 
-# Editeurs / OS
+# IDE / éditeurs
 .vscode/
 .idea/
-.DS_Store
+*.swp
 
-# WebDriver téléchargé manuellement (si utilisé)
-chromedriver*
-geckodriver*
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Variables d'environnement éventuelles
+.env
