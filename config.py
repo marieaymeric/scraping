@@ -22,7 +22,7 @@ CATEGORIES = {
         "PC": "https://www.amazon.fr/gp/browse.html?node=548026&ref_=nav_em_pc_0_2_12_10",
     },
     "Livres": {
-        "Ebooks Kindle": "https://www.amazon.fr/amz-books/store?node=695398031&ref_=dbs_ksf&storeType=browse&filters=v1%3AFORMAT%5Bkindle_edition%5D&ccs_id=01c6d5e1-0159-4f56-94f3-4ef0853e172a",
+        "Ebooks Kindle": "https://www.amazon.fr/amz-books/store?node=695398031&ref_=dbs_ksf&storeType=browse&filters=v1%3AFORMAT%5Bkindle_edition%5D&ccs_id=a9b874c3-38da-4510-8d39-5ba6f4a6d810",
         "Manuels scolaires et parascolaire": "https://www.amazon.fr/gp/browse.html?node=301146&ref_=nav_em__scpr_0_2_10_7",
     },
 }
