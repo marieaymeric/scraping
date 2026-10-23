@@ -7,7 +7,14 @@ from app.models.produit import Produit
 
 def page_contient_captcha(soup):
     texte = soup.get_text().lower()
-    indices = ["enter the characters you see", "captcha", "robot check", "saisissez les caractères"]
+    indices = [
+        "enter the characters you see",
+        "captcha",
+        "robot check",
+        "saisissez les caractères",
+        "automated access to amazon data",
+        "api-services-support@amazon.com",
+    ]
     return any(indice in texte for indice in indices)
 
 
@@ -38,29 +45,37 @@ def scraper_sous_categorie(driver, url, categorie, sous_categorie, nb_pages=1):
             input("Résous le CAPTCHA manuellement dans la fenêtre du navigateur, puis appuie sur Entrée pour continuer...")
             soup = BeautifulSoup(driver.page_source, "html.parser")
 
-        items = soup.select("div[data-component-type='s-search-result']")
+        # Supporte les deux formats de page : recherche classique (/s?k=...)
+        # et page de catégorie (/b/?node=...)
+        items = soup.select(
+            "div[data-component-type='s-search-result'], div[data-cy='asin-faceout-container']"
+        )
 
         if len(items) == 0:
             sauvegarder_debug(driver, soup, categorie, sous_categorie, page)
 
         for item in items:
             try:
-                titre = item.select_one("h2 span").get_text(strip=True)
+                titre_elem = item.select_one("h2 span")
+                titre = titre_elem.get_text(strip=True) if titre_elem else None
             except AttributeError:
                 titre = None
 
             try:
-                prix = item.select_one("span.a-price > span.a-offscreen").get_text(strip=True)
+                prix_elem = item.select_one("span.a-price > span.a-offscreen")
+                prix = prix_elem.get_text(strip=True) if prix_elem else None
             except AttributeError:
                 prix = None
 
             try:
-                lien = "https://www.amazon.fr" + item.select_one("h2 a")["href"]
+                lien_elem = item.select_one("h2 a") or item.select_one("a.a-link-normal.s-no-outline")
+                lien = "https://www.amazon.fr" + lien_elem["href"] if lien_elem else None
             except (AttributeError, TypeError):
                 lien = None
 
             try:
-                image = item.select_one("img.s-image")["src"]
+                image_elem = item.select_one("img.s-image")
+                image = image_elem["src"] if image_elem else None
             except (AttributeError, TypeError):
                 image = None
 
